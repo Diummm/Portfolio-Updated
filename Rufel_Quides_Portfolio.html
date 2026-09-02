@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rufel Q. Quides — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --paper:#ffffff;
+    --paper-dim:#f2f2f2;
+    --line:#d8d8d8;
+    --line-on-ink:#3a3a3a;
+    --grey:#8a8a8a;
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+    --maxw:920px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;}
+  ::selection{background:var(--ink); color:var(--paper);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,255,255,0.92);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:18px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:1.15rem;
+    text-decoration:none;
+    letter-spacing:0.01em;
+  }
+  nav.links{
+    display:flex;
+    gap:28px;
+  }
+  nav.links a{
+    text-decoration:none;
+    font-size:0.92rem;
+    position:relative;
+    padding-bottom:3px;
+    color:var(--ink);
+  }
+  nav.links a::after{
+    content:'';
+    position:absolute;
+    left:0; right:100%;
+    bottom:0;
+    height:1px;
+    background:var(--ink);
+    transition:right 0.25s ease;
+  }
+  nav.links a:hover::after,
+  nav.links a.active::after{
+    right:0;
+  }
+  nav.links a.active{font-weight:600;}
+
+  .menu-btn{
+    display:none;
+    background:none;
+    border:1px solid var(--ink);
+    width:38px;
+    height:34px;
+    border-radius:0;
+    cursor:pointer;
+    position:relative;
+  }
+  .menu-btn span, .menu-btn span::before, .menu-btn span::after{
+    content:'';
+    position:absolute;
+    left:9px; right:9px;
+    height:1px;
+    background:var(--ink);
+  }
+  .menu-btn span{top:16px;}
+  .menu-btn span::before{top:-6px;}
+  .menu-btn span::after{top:6px;}
+
+  @media (max-width: 720px){
+    nav.links{
+      position:fixed;
+      top:69px; left:0; right:0;
+      background:var(--paper);
+      border-bottom:1px solid var(--line);
+      flex-direction:column;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.3s ease;
+    }
+    nav.links.open{max-height:320px;}
+    nav.links a{
+      padding:16px 24px;
+      border-top:1px solid var(--line);
+    }
+    nav.links a::after{display:none;}
+    .menu-btn{display:block;}
+  }
+
+  section{padding:96px 24px;}
+  .wrap{max-width:var(--maxw); margin:0 auto;}
+  .invert{background:var(--ink); color:var(--paper);}
+  .invert .grey{color:#b0b0b0;}
+  .invert hr{border-color:var(--line-on-ink);}
+
+  hr{border:none; border-top:1px solid var(--line); margin:0;}
+  .grey{color:var(--grey);}
+
+  .eyebrow{
+    font-size:0.82rem;
+    color:var(--grey);
+    margin:0 0 10px;
+  }
+  .invert .eyebrow{color:#9a9a9a;}
+
+  h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:1.9rem;
+    margin:0 0 40px;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- HERO ---------- */
+  #hero{
+    padding-top:120px;
+    padding-bottom:110px;
+  }
+  #hero .eyebrow{
+    font-family:var(--sans);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  #hero .eyebrow .dot{
+    width:7px; height:7px;
+    background:var(--ink);
+    border-radius:50%;
+    display:inline-block;
+    flex:none;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.25;}
+  }
+  .hero-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.4rem, 6vw, 4.1rem);
+    line-height:1.06;
+    letter-spacing:-0.015em;
+    margin:0 0 28px;
+    max-width:12ch;
+    opacity:0;
+    transform:translateY(14px);
+    animation:rise 0.7s ease forwards 0.15s;
+  }
+  .hero-title em{
+    font-style:italic;
+    font-weight:400;
+  }
+  @keyframes rise{
+    to{opacity:1; transform:translateY(0);}
+  }
+  .hero-sub{
+    max-width:52ch;
+    font-size:1.06rem;
+    color:#3d3d3d;
+    margin:0 0 40px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 14px;
+    font-size:0.86rem;
+  }
+  .tag{
+    border:1px solid var(--ink);
+    padding:6px 13px;
+  }
+  .hero-contacts{
+    margin-top:56px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    font-size:0.9rem;
+  }
+  .hero-contacts a{text-decoration:none; border-bottom:1px solid var(--ink);}
+
+  /* ---------- WORK ---------- */
+  .project{
+    padding:44px 0;
+    border-top:1px solid var(--line);
+  }
+  .project:last-child{border-bottom:1px solid var(--line);}
+  .project-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .project-title{
+    font-family:var(--serif);
+    font-size:1.5rem;
+    font-weight:500;
+    margin:0;
+  }
+  .project-role{
+    font-size:0.85rem;
+    color:var(--grey);
+    white-space:nowrap;
+  }
+  .project-desc{
+    max-width:62ch;
+    margin:16px 0 18px;
+    color:#333;
+  }
+  .stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    font-family:var(--sans);
+    font-size:0.78rem;
+  }
+  .stack span{
+    border:1px solid var(--line);
+    padding:4px 10px;
+  }
+
+  /* ---------- EXPERIENCE (inverted) ---------- */
+  .role{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:24px;
+    padding:36px 0;
+    border-top:1px solid var(--line-on-ink);
+  }
+  .role:last-child{border-bottom:1px solid var(--line-on-ink);}
+  .role-dates{
+    font-size:0.85rem;
+    color:#9a9a9a;
+    padding-top:4px;
+  }
+  .role-title{
+    font-family:var(--serif);
+    font-size:1.3rem;
+    font-weight:500;
+    margin:0 0 4px;
+  }
+  .role-org{
+    font-size:0.92rem;
+    color:#bdbdbd;
+    margin:0 0 16px;
+  }
+  .role ul{
+    margin:0;
+    padding-left:18px;
+    color:#d6d6d6;
+    font-size:0.94rem;
+  }
+  .role li{margin-bottom:8px;}
+  .role li:last-child{margin-bottom:0;}
+
+  @media (max-width:640px){
+    .role{grid-template-columns:1fr;}
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:40px 32px;
+  }
+  @media (max-width:640px){
+    .skill-groups{grid-template-columns:1fr;}
+  }
+  .skill-group h3{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:0.82rem;
+    margin:0 0 16px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--ink);
+  }
+  .skill-group ul{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    font-size:0.94rem;
+  }
+  .skill-group li{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .skill-group li::before{
+    content:'—';
+    color:var(--grey);
+    flex:none;
+  }
+
+  /* ---------- EDUCATION / CERTS (inverted) ---------- */
+  .edu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+  }
+  @media (max-width:640px){
+    .edu-grid{grid-template-columns:1fr;}
+  }
+  .edu-item{margin-bottom:26px;}
+  .edu-item:last-child{margin-bottom:0;}
+  .edu-year{
+    font-size:0.8rem;
+    color:#9a9a9a;
+    margin-bottom:4px;
+  }
+  .edu-name{
+    font-family:var(--serif);
+    font-size:1.1rem;
+    margin:0 0 3px;
+  }
+  .edu-sub{
+    font-size:0.88rem;
+    color:#bdbdbd;
+    margin:0;
+  }
+
+  /* ---------- CONTACT ---------- */
+  #contact{
+    text-align:left;
+  }
+  .contact-title{
+    font-family:var(--serif);
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(2rem, 5vw, 3.2rem);
+    line-height:1.12;
+    max-width:14ch;
+    margin:0 0 36px;
+  }
+  .contact-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px 30px;
+    margin-bottom:70px;
+  }
+  .contact-links a{
+    text-decoration:none;
+    font-size:1.02rem;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+  }
+  .contact-links a:hover{border-color:var(--ink);}
+
+  footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+    font-size:0.8rem;
+    color:var(--grey);
+  }
+
+  .back-top{
+    text-decoration:none;
+    color:var(--ink);
+    border-bottom:1px solid var(--ink);
+  }
+
+  :focus-visible{
+    outline:2px solid var(--ink);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="#hero" class="brand">Rufel Quides</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    <nav class="links" id="navLinks">
+      <a href="#work" data-section="work">Work</a>
+      <a href="#experience" data-section="experience">Experience</a>
+      <a href="#skills" data-section="skills">Skills</a>
+      <a href="#education" data-section="education">Education</a>
+      <a href="#contact" data-section="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span class="dot"></span>Dagupan City, Pangasinan, Philippines</p>
+      <h1 class="hero-title">Software developer, <em>trained to build things that hold up.</em></h1>
+      <p class="hero-sub">BS Information Technology graduate specializing in System Development. I write code, wire up networks, and document everything along the way — from a 3D educational game engine to on-the-ground IT support for a regional utility company.</p>
+      <div class="hero-meta">
+        <span class="tag">Java / Python / C#</span>
+        <span class="tag">Unity &amp; Blender</span>
+        <span class="tag">Web: HTML / CSS / JS</span>
+        <span class="tag">IT Support</span>
+      </div>
+      <div class="hero-contacts">
+        <a href="mailto:rufelq@gmail.com">rufelq@gmail.com</a>
+        <a href="tel:+639954031046">+63 995 403 1046</a>
+        <a href="https://github.com/Diummm" target="_blank" rel="noopener">github.com/Diummm</a>
+        <a href="https://linkedin.com/in/diumquides/" target="_blank" rel="noopener">linkedin.com/in/diumquides</a>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <p class="eyebrow">Selected work</p>
+      <h2>Two projects, two different problems.</h2>
+
+      <div class="project">
+        <div class="project-head">
+          <h3 class="project-title">EcoGuard: Balance of Nature</h3>
+          <span class="project-role">Lead Programmer · Capstone, 2023–2024</span>
+        </div>
+        <p class="project-desc">A 3D semi-open map game built to teach children environmental awareness. Players move through interactive missions that reward sustainability and conservation practices — built with a small team, with me writing the core game logic in C#.</p>
+        <div class="stack"><span>Unity</span><span>C#</span><span>Blender</span></div>
+      </div>
+
+      <div class="project">
+        <div class="project-head">
+          <h3 class="project-title">Personal Portfolio Website</h3>
+          <span class="project-role">Solo project, 2023</span>
+        </div>
+        <p class="project-desc">An earlier self-built portfolio designed to showcase projects and skills as I was starting out — my first real exercise in translating design ideas into working front-end code.</p>
+        <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="invert">
+    <div class="wrap">
+      <p class="eyebrow">Experience</p>
+      <h2>Where I've worked.</h2>
+
+      <div class="role">
+        <div class="role-dates">2025 —<br>Amazon (U.S.)</div>
+        <div>
+          <h3 class="role-title">Customer Service Representative</h3>
+          <p class="role-org">Amazon · U.S.-based accounts</p>
+          <ul>
+            <li>Handled inbound customer communications for U.S. accounts, resolving inquiries clearly and professionally.</li>
+            <li>Followed structured escalation procedures and documented interactions accurately.</li>
+            <li>Worked U.S. business hours consistently, staying composed during high-volume periods.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-dates">Jan – Apr 2025<br>Dagupan City, PH</div>
+        <div>
+          <h3 class="role-title">IT Support Trainee</h3>
+          <p class="role-org">Management Information Systems Division · Dagupan Electric Corporation (DECorp)</p>
+          <ul>
+            <li>Provided technical support across network monitoring, VoIP checks, and remote access using NetWare and FreeBSD.</li>
+            <li>Set up and maintained hardware — laptops, desktops, printers, and CCTV systems.</li>
+            <li>Used PRTG for bandwidth monitoring and configured Wi-Fi routers and access points.</li>
+            <li>Maintained technical documentation and equipment logs, and supported inventory management.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <p class="eyebrow">Capabilities</p>
+      <h2>What I bring to a team.</h2>
+
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3>Languages &amp; Tools</h3>
+          <ul>
+            <li>Java, Python, C#</li>
+            <li>HTML, CSS, JavaScript</li>
+            <li>Unity, Blender</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Core Competencies</h3>
+          <ul>
+            <li>Software development</li>
+            <li>UI/UX &amp; map design</li>
+            <li>Troubleshooting</li>
+            <li>Project management</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Support &amp; Coordination</h3>
+          <ul>
+            <li>Customer support (voice/chat)</li>
+            <li>Documentation &amp; reporting</li>
+            <li>Cross-team coordination</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Working Style</h3>
+          <ul>
+            <li>Adaptability &amp; fast learning</li>
+            <li>Time management</li>
+            <li>Typing — 80 WPM average, 124 WPM peak</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="invert">
+    <div class="wrap">
+      <p class="eyebrow">Education &amp; certifications</p>
+      <h2>Background.</h2>
+
+      <div class="edu-grid">
+        <div>
+          <div class="edu-item">
+            <p class="edu-year">2021 – 2025</p>
+            <p class="edu-name">BS Information Technology</p>
+            <p class="edu-sub">Major in System Development — PHINMA University of Pangasinan</p>
+          </div>
+          <div class="edu-item">
+            <p class="edu-year">2019 – 2021</p>
+            <p class="edu-name">Senior High School</p>
+            <p class="edu-sub">PHINMA University of Pangasinan</p>
+          </div>
+        </div>
+        <div>
+          <div class="edu-item">
+            <p class="edu-year">March 2025</p>
+            <p class="edu-name">Civil Service Eligibility — Professional Level</p>
+            <p class="edu-sub">Career Service Examination, rating 80.40%</p>
+          </div>
+          <div class="edu-item">
+            <p class="edu-year">2024</p>
+            <p class="edu-name">Employability Skills: Job Ready</p>
+            <p class="edu-sub">Wadhwani Foundation</p>
+          </div>
+          <div class="edu-item">
+            <p class="edu-year">2023</p>
+            <p class="edu-name">Web Development</p>
+            <p class="edu-sub">Sololearn</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="contact-title">Open to new roles — <em>let's talk.</em></h2>
+      <div class="contact-links">
+        <a href="mailto:rufelq@gmail.com">rufelq@gmail.com</a>
+        <a href="tel:+639954031046">+63 995 403 1046</a>
+        <a href="https://github.com/Diummm" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://linkedin.com/in/diumquides/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <footer>
+        <span>Rufel Q. Quides — Dagupan City, Pangasinan</span>
+        <a href="#hero" class="back-top">Back to top</a>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // active nav link on scroll
+  const sections = document.querySelectorAll('main section[id]');
+  const navItems = document.querySelectorAll('nav.links a');
+  const setActive = (id) => {
+    navItems.forEach(a => {
+      a.classList.toggle('active', a.dataset.section === id);
+    });
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        setActive(entry.target.id);
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(sec => observer.observe(sec));
+</script>
+
+</body>
+</html>
